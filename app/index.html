@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <base href="/">
+    <title>Angular#1.4 Router</title>
+</head>
+<body ng-app="app" ng-controller="AppController as app">
+    <h1>Angular#1.4 Router</h1>
+
+    <a router-link="home()">Home</a>
+    <a router-link="user({id: 10})">User</a>
+    
+    <div router-view-port></div>
+
+
+    <hr/>
+
+    <h3>Router API</h3>
+
+    <div class="api">
+        <h4>Router</h4>
+        <p>The router is responsible for mapping URLs to components.</p>
+
+        <h3>Methods</h3>
+        <h5>childRouter</h5>
+        <p>Constructs a child router. You probably don't need to use this unless you're writing a reusable component.</p>
+
+        <h5>registerViewPort</h5>
+        <p>Register an object to notify of route changes. You probably don't need to use this unless you're writing a reusable component.</p>
+
+        <h5>config</h5>
+        <p>Update the routing configuation and trigger a navigation.</p>
+
+        <h5>navigate</h5>
+        <p>Navigate to a URL. Returns the cannonical URL for the route navigated to.</p>
+
+        <h5>renavigate</h5>
+        <p>Navigates to either the last URL successfully naviagted to, or the last URL requested if the router has yet to successfully navigate. You shouldn't need to use this API very often.</p>
+
+        <h5>generate</h5>
+        <p>generate a URL from a component name and optional map of parameters. The URL is relative to the app's base href.</p>
+    </div>
+
+    <hr/>
+
+    <h3>Directives</h3>
+
+    <div class="api">
+        <h4>routerViewPortDirective</h4>
+        <p>A routerViewPort is where resolved content goes, more or less like ng-view.</p>
+        <pre>
+            &#60;div router-view-port="name">&#60;/div>
+        </pre>
+
+        <p>You can configure multiple view ports on the same path</p>
+
+        <pre>
+            $router.config([
+              { path: '/user',
+                components: {
+                  master: 'userList',
+                  detail: 'user'
+                }
+              }
+            ]);
+        </pre>
+
+        <pre>
+            &#60;div router-view-port="master">&#60;/div>
+            &#60;div router-view-port="detail">&#60;/div>
+        </pre>
+    </div>
+
+
+    <div class="api">
+        <h4>routerLinkDirective</h4>
+        <p>Lets you link to different parts of the app, and automatically generates hrefs.</p>
+        <pre>
+            &#60;div ng-controller="AppController as app">
+                &#60;a router-link="user({id: app.user.id})">{{app.user.name}}&#60;/a>
+            &#60;/div>
+        </pre>
+    </div>
+
+    <hr/>
+
+    <h3>Provider</h3>
+
+    <div class="api">
+        <h4>$componentLoaderProvider</h4>
+        <p>This lets you configure conventions for what controllers are named and where to load templates from.</p>
+        <p>The default behavior is to dasherize and serve from <strong>./components</strong>. A component called <strong>myWidget</strong> uses a controller named <strong>MyWidgetController</strong> and a template loaded from <strong>./components/my-widget/my-widget.html</strong>.</p>
+        <p>A component is:
+            <ul>
+                <li>a controller</li>
+                <li>a template</li>
+                <li>an optional router</li>
+            </ul>
+        </p>
+        <p>This service makes it easy to group all of them into a single concept.</p>
+
+        <h5>$componentLoaderProvider#setCtrlNameMapping</h5>
+        <p>takes a function for mapping component names to component controller names</p>
+
+        <h5>$componentLoaderProvider#setTemplateMapping</h5>
+        <p>takes a function for mapping component names to component template URLs</p>
+    </div>
+
+
+
+
+
+    <script src="angular/angular.js"></script>
+    <script src="angular-new-router/dist/router.es5.js"></script>
+    <script src="javascript/app.js"></script>
+    <script src="javascript/components/home/home.js"></script>
+    <script src="javascript/components/user/user.js"></script>
+</body>
+</html>

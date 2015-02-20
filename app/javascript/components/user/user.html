@@ -1,0 +1,11 @@
+<h1>Hello, I am the User Component!</h1>
+
+<p>My name is {{user.name}} and my id is {{user.id}}</p>
+
+
+
+<div ng-show="user.actions.confirm">
+    <p>Move to another view?</p>
+    <button ng-click="user.actions.save()">Yes</button>
+    <button ng-click="user.actions.reject()">No</button>
+</div>
